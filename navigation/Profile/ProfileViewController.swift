@@ -9,10 +9,14 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    let profileHeaderView = ProfileHeaderView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        navigationItem.title = "Профиль"
+        self.navigationItem.title = "Профиль"
+        self.view.addSubview(profileHeaderView)
+        profileHeaderView.activateConstraints()
     }
-   
+           
 }
