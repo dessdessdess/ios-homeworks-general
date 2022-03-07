@@ -82,38 +82,34 @@ class ProfileHeaderView: UIView {
     
     func activateConstraints() {
         
-        let safeArea = self.superview!.safeAreaLayoutGuide
-        
-        self.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
-        self.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
-        self.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
-        self.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).isActive = true
-        
-        avatarImageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16).isActive = true
-        avatarImageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16).isActive = true
-        avatarImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        avatarImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        let safeArea = self.safeAreaLayoutGuide
+        self.textFieldHeightAnchor = self.textField.heightAnchor.constraint(equalToConstant: 0)
                         
-        nameLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 27).isActive = true
-        nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16).isActive = true
-        nameLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16).isActive = true
-        
-        statusLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor).isActive = true
-        statusLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor).isActive = true
-        statusLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 34).isActive = true
-        statusLabel.heightAnchor.constraint(equalToConstant: 14).isActive = true
-       
-        textField.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor).isActive = true
-        textField.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor).isActive = true
-        textField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16).isActive = true
-        textFieldHeightAnchor = textField.heightAnchor.constraint(equalToConstant: 0)
-        textFieldHeightAnchor?.isActive = true
-        
-        statusButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 16).isActive = true
-        statusButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16).isActive = true
-        statusButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16).isActive = true
-        statusButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
+        NSLayoutConstraint.activate([
+            avatarImageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
+            avatarImageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
+            
+            nameLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 27),
+            nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            nameLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
+            
+            statusLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            statusLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
+            statusLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 34),
+            statusLabel.heightAnchor.constraint(equalToConstant: 14),
+            
+            textField.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            textField.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
+            textField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16),
+            textFieldHeightAnchor!,
+            
+            statusButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 16),
+            statusButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
+            statusButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
+            statusButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
     
     @objc private func statusTextChanged(_ textField: UITextField) {
@@ -123,18 +119,21 @@ class ProfileHeaderView: UIView {
     
     @objc private func didTapStatusButton() {
                         
-        textFieldHeightAnchor?.constant = textFieldIsHidden ? 40 : 0
-                
+        self.textFieldHeightAnchor?.constant = textFieldIsHidden ? 40 : 0
+        if textFieldIsHidden {
+            self.textField.becomeFirstResponder()
+            self.statusButton.setTitle("Сохранить статус", for: .normal)
+        } else {
+            self.statusButton.setTitle("Изменить статус", for: .normal)
+            self.endEditing(true)
+        }
+        self.textField.text = ""
+        
         UIView.animate(withDuration: 0.3) {
             self.layoutIfNeeded()
         } completion: { _ in
             self.textFieldIsHidden.toggle()
-            self.statusLabel.text = self.statusText            
-            if self.textFieldIsHidden {
-                self.statusButton.setTitle("Изменить статус", for: .normal)
-            } else {
-                self.statusButton.setTitle("Сохранить статус", for: .normal)
-            }
+            self.statusLabel.text = self.statusText
         }
         
     }
