@@ -9,7 +9,6 @@ import UIKit
 
 class LogInHeaderView: UIView{
     
-    private let colorSet = UIColor(hexString: "#4885CC")
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo.png"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,6 +36,9 @@ class LogInHeaderView: UIView{
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.cornerRadius = 10
+        textField.layer.maskedCorners = [
+            .layerMinXMinYCorner, .layerMaxXMinYCorner
+        ]
         textField.clipsToBounds = true
         textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 5))
@@ -55,6 +57,9 @@ class LogInHeaderView: UIView{
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.cornerRadius = 10
+        textField.layer.maskedCorners = [
+            .layerMinXMaxYCorner, .layerMaxXMaxYCorner
+        ]
         textField.clipsToBounds = true
         textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 5))

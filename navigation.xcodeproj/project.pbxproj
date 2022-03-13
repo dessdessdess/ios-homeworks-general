@@ -20,6 +20,9 @@
 		84C2081827B65AA70055A909 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C2081727B65AA70055A909 /* FeedViewController.swift */; };
 		84C2081A27B65B560055A909 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C2081927B65B560055A909 /* ProfileViewController.swift */; };
 		84C2081C27B66ED80055A909 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C2081B27B66ED80055A909 /* PostViewController.swift */; };
+		84EDD91B27DDC7230007D4DF /* DynamicArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EDD91A27DDC7230007D4DF /* DynamicArticleTableViewCell.swift */; };
+		84EDD91D27DDC76C0007D4DF /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EDD91C27DDC76C0007D4DF /* Protocols.swift */; };
+		84EDD91F27DDEAED0007D4DF /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EDD91E27DDEAED0007D4DF /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		84C2081727B65AA70055A909 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		84C2081927B65B560055A909 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		84C2081B27B66ED80055A909 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		84EDD91A27DDC7230007D4DF /* DynamicArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicArticleTableViewCell.swift; sourceTree = "<group>"; };
+		84EDD91C27DDC76C0007D4DF /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		84EDD91E27DDEAED0007D4DF /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,7 @@
 				841CE6B327DC8B920079BC2C /* LogInViewController.swift */,
 				84396CFE27B8E11600CDBCE3 /* ProfileHeaderView.swift */,
 				841CE6B727DC940F0079BC2C /* LogInHeaderView.swift */,
+				84EDD91A27DDC7230007D4DF /* DynamicArticleTableViewCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -87,7 +94,9 @@
 				84C2081727B65AA70055A909 /* FeedViewController.swift */,
 				84C2081B27B66ED80055A909 /* PostViewController.swift */,
 				8430C48527B67AE300333D1E /* InfoViewController.swift */,
+				84EDD91C27DDC76C0007D4DF /* Protocols.swift */,
 				841CE6BC27DD1AC70079BC2C /* Extensions.swift */,
+				84EDD91E27DDEAED0007D4DF /* Data.swift */,
 				84396CFD27B8E06400CDBCE3 /* Profile */,
 				84C2080A27B6555E0055A909 /* Assets.xcassets */,
 				84C2080C27B6555E0055A909 /* LaunchScreen.storyboard */,
@@ -166,14 +175,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84EDD91B27DDC7230007D4DF /* DynamicArticleTableViewCell.swift in Sources */,
 				841CE6B827DC940F0079BC2C /* LogInHeaderView.swift in Sources */,
 				84C2081C27B66ED80055A909 /* PostViewController.swift in Sources */,
 				84C2081627B65A390055A909 /* TabBarController.swift in Sources */,
 				841CE6B427DC8B920079BC2C /* LogInViewController.swift in Sources */,
 				84C2080227B6555D0055A909 /* AppDelegate.swift in Sources */,
 				8430C48627B67AE300333D1E /* InfoViewController.swift in Sources */,
+				84EDD91F27DDEAED0007D4DF /* Data.swift in Sources */,
 				84C2081A27B65B560055A909 /* ProfileViewController.swift in Sources */,
 				84C2081827B65AA70055A909 /* FeedViewController.swift in Sources */,
+				84EDD91D27DDC76C0007D4DF /* Protocols.swift in Sources */,
 				84C2080427B6555D0055A909 /* SceneDelegate.swift in Sources */,
 				841CE6BD27DD1AC70079BC2C /* Extensions.swift in Sources */,
 				84396CFF27B8E11600CDBCE3 /* ProfileHeaderView.swift in Sources */,
