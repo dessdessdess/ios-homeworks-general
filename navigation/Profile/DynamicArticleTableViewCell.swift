@@ -19,11 +19,6 @@ final class DynamicArticleTableViewCell: UITableViewCell {
     
     private lazy var backView: UIView = {
         let view = UIView()
-//        view.clipsToBounds = true
-//        view.layer.cornerRadius = 10
-//        view.layer.maskedCorners = [
-//            .layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner
-//        ]
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
