@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController {
                
         self.view.backgroundColor = .white
         self.navigationItem.title = "Профиль"
+        self.navigationItem.backButtonTitle = "Back"
         self.view.addSubview(tableView)
         activateConstraints()
         
@@ -30,8 +31,20 @@ class ProfileViewController: UIViewController {
         return profileHeaderView
     }()
     
+    private lazy var photosTableViewSection: PhotosTableViewSection = {
+        let photosTableViewSection = PhotosTableViewSection()
+        photosTableViewSection.arrowButton.addTarget(self, action: #selector(didTapArrowButton), for: .touchUpInside)
+        return photosTableViewSection
+    }()
+    
+    //для открытия collection view, нажатие на секцию не работает
+    @objc private func didTapArrowButton() {
+        let photosViewController = PhotosViewController()
+        navigationController?.pushViewController(photosViewController, animated: true)
+    }
+    
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .grouped)
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = .white
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
@@ -55,34 +68,98 @@ class ProfileViewController: UIViewController {
         ])
                         
         self.profileHeaderView.activateConstraints()
-    }
         
+    }
+     
 }
 
+
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
+        
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource.count
+        
+        if section == 0 {
+            return 0
+        } else {
+            return self.dataSource.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return 220
+
+        if section == 0 {
+            return 236
+        }
+        else {
+            
+            //как правильно расчитать высоту секции если высота избражений расчитывается от ширины экрана?
+            //при повороте экрана надо же перерасчитывать высоту
+            return 150
         }
         
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
-        headerView.addSubview(profileHeaderView)
-        
-        NSLayoutConstraint.activate([
-            self.profileHeaderView.topAnchor.constraint(equalTo: headerView.topAnchor),
-            self.profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
-            self.profileHeaderView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor),
-            self.profileHeaderView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor)
-            ])
-        return headerView
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        //чтобы скрыть футер секции
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        //чтобы скрыть футер секции
+        let someView = UIView()
+        return someView
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if section == 0 {
+            
+            let headerView = UIView(frame: .zero)
+            headerView.addSubview(profileHeaderView)
+            
+            NSLayoutConstraint.activate([
+                self.profileHeaderView.topAnchor.constraint(equalTo: headerView.topAnchor),
+                self.profileHeaderView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor),
+                self.profileHeaderView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor),
+                self.profileHeaderView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor)
+            ])
+            return headerView
+            
+        } else {
+            
+            //по заданию сказано что надо сделать для секции
+            let someView = UIView(frame: .zero)
+            someView.addSubview(photosTableViewSection)
+            
+            NSLayoutConstraint.activate([
+                self.photosTableViewSection.topAnchor.constraint(equalTo: someView.topAnchor),
+                self.photosTableViewSection.bottomAnchor.constraint(equalTo: someView.bottomAnchor),
+                self.photosTableViewSection.leadingAnchor.constraint(equalTo: someView.safeAreaLayoutGuide.leadingAnchor),
+                self.photosTableViewSection.trailingAnchor.constraint(equalTo: someView.safeAreaLayoutGuide.trailingAnchor)
+            ])
+            
+            for subView in photosTableViewSection.stackView.arrangedSubviews {
+                //расчет высоты картинок
+                subView.heightAnchor.constraint(lessThanOrEqualToConstant: (self.view.frame.width/4) - 24).isActive = true
+            }
+            
+            return someView
+                    
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath) //не отрабатывает при нажатии на секцию, поэтому пришлось открытие фото галереи  сделать по нажатию стрелки вправо
+    }
+        
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+               
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as? DynamicArticleTableViewCell else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
             return cell
