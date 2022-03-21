@@ -21,11 +21,15 @@ class TabBarController: UITabBarController {
                 
         let logInViewController = LogInViewController()
         logInViewController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person"), tag: 1)
+        
+        let gestureProfileViewController = GestureProfileViewController()
+        gestureProfileViewController.tabBarItem = UITabBarItem(title: "Avatar", image: UIImage(systemName: "person.crop.circle"), tag: 2)
                 
         self.setViewControllers(
             [
                 UINavigationController(rootViewController: feedViewController),
-                UINavigationController(rootViewController: logInViewController)
+                UINavigationController(rootViewController: logInViewController),
+                UINavigationController(rootViewController: gestureProfileViewController)
             ]
             , animated: true)
         
