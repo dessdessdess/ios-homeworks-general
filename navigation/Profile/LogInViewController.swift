@@ -42,7 +42,9 @@ class LogInViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-        
+    
+    private var tapGestureRecognizer = UITapGestureRecognizer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
@@ -50,6 +52,7 @@ class LogInViewController: UIViewController {
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.contentView)
         self.activateConstraints()
+        self.setupGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +77,7 @@ class LogInViewController: UIViewController {
         let scrollViewLeftConstraint = self.scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor)
         
         let contentViewTopConstraint = self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor)
-        let contentViewBottomConstraint = self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor)
+        let contentViewBottomConstraint = self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: -16)
         let contentViewRightConstraint = self.contentView.rightAnchor.constraint(equalTo: self.scrollView.rightAnchor)
         let contentViewLeftConstraint = self.contentView.leftAnchor.constraint(equalTo: self.scrollView.leftAnchor)
         let contentViewCenterYConstraint = self.contentView.centerYAnchor.constraint(equalTo: self.scrollView.centerYAnchor)
@@ -82,8 +85,8 @@ class LogInViewController: UIViewController {
                 
         let loginHeaderViewLeadingAnchor = self.logInHeaderView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
         let loginHeaderViewTrailingAnchor = self.logInHeaderView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-        let loginHeaderViewTopAnchor = self.logInHeaderView.topAnchor.constraint(equalTo: contentView.topAnchor)
-        let loginHeaderViewHeightAnchor = self.logInHeaderView.heightAnchor.constraint(equalToConstant: 440)
+        let loginHeaderViewTopAnchor = self.logInHeaderView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        let loginHeaderViewHeightAnchor = self.logInHeaderView.heightAnchor.constraint(equalToConstant: 100)
         
         let loginButtonTopAnchor = self.loginButton.topAnchor.constraint(equalTo: self.logInHeaderView.bottomAnchor, constant: 16)
         let loginButtonLeftAnchor = self.loginButton.leftAnchor.constraint(equalTo: self.logInHeaderView.leftAnchor, constant: 16)
@@ -92,12 +95,21 @@ class LogInViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             scrollViewTopConstraint, scrollViewRightConstraint, scrollViewBottomConstraint, scrollViewLeftConstraint,
-            contentViewTopConstraint, contentViewBottomConstraint, contentViewRightConstraint, contentViewLeftConstraint,            contentViewCenterYConstraint, contentViewCenterXConstraint,
+            contentViewTopConstraint, contentViewBottomConstraint, contentViewRightConstraint, contentViewLeftConstraint, contentViewCenterYConstraint, contentViewCenterXConstraint,
             loginHeaderViewLeadingAnchor, loginHeaderViewTrailingAnchor, loginHeaderViewTopAnchor, loginHeaderViewHeightAnchor,
             loginButtonTopAnchor, loginButtonLeftAnchor, loginButtonTrailingAnchor, loginButtonHeightAnchor
         ])
         
         self.logInHeaderView.activateConstraints()
+    }
+    
+    private func setupGesture() {
+            self.tapGestureRecognizer.addTarget(self, action: #selector(self.viewTapped))
+            self.view.addGestureRecognizer(self.tapGestureRecognizer)
+        }
+    
+    @objc private func viewTapped() {
+        self.view.endEditing(true)
     }
         
     @objc private func didTapLoginButton() {
@@ -106,16 +118,14 @@ class LogInViewController: UIViewController {
     
     @objc private func kbdShow(notification: NSNotification){
         if let kbdSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            self.scrollView.contentInset.bottom = kbdSize.height
+            self.scrollView.contentOffset.y = self.loginButton.frame.height + 16
             self.scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbdSize.height, right: 0)
         }
     }
     
     @objc private func kbdHide(notification: NSNotification) {
-        self.scrollView.contentInset.bottom = .zero
+        self.scrollView.contentOffset.y = .zero
         self.scrollView.verticalScrollIndicatorInsets = .zero
     }
-    
-    
-    
+       
 }
