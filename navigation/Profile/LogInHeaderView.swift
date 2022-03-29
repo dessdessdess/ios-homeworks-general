@@ -87,10 +87,10 @@ class LogInHeaderView: UIView{
         NSLayoutConstraint.activate([
             self.logoImageView.heightAnchor.constraint(equalToConstant: 100),
             self.logoImageView.widthAnchor.constraint(equalToConstant: 100),
-            self.logoImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 120),
+            self.logoImageView.bottomAnchor.constraint(equalTo: self.stackView.centerYAnchor, constant: -120),
             self.logoImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            self.stackView.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 120),
+            self.stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0),
             self.stackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             self.stackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             self.stackView.heightAnchor.constraint(equalToConstant: 100),
