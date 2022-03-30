@@ -68,9 +68,9 @@ class LogInViewController: UIViewController {
         nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-        
+    
     private func activateConstraints() {
-     
+        
         NSLayoutConstraint.activate([
             self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
             self.scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
@@ -99,14 +99,14 @@ class LogInViewController: UIViewController {
     }
     
     private func setupGesture() {
-            self.tapGestureRecognizer.addTarget(self, action: #selector(self.viewTapped))
-            self.view.addGestureRecognizer(self.tapGestureRecognizer)
-        }
+        self.tapGestureRecognizer.addTarget(self, action: #selector(self.viewTapped))
+        self.view.addGestureRecognizer(self.tapGestureRecognizer)
+    }
     
     @objc private func viewTapped() {
         self.view.endEditing(true)
     }
-        
+    
     @objc private func didTapLoginButton() {
         self.navigationController?.pushViewController(ProfileViewController(), animated: true)
     }
@@ -122,5 +122,5 @@ class LogInViewController: UIViewController {
         self.scrollView.contentOffset.y = .zero
         self.scrollView.verticalScrollIndicatorInsets = .zero
     }
-       
+    
 }

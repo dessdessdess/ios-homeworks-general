@@ -8,7 +8,7 @@
 import UIKit
 
 class GestureProfileViewController: UIViewController {
-
+    
     let avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "cat.jpg"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -75,10 +75,12 @@ class GestureProfileViewController: UIViewController {
             self.avatarLeadingAnchor,
             self.avatarWidthAnchor,
             self.avatarHeightAnchor,
+            
             self.backView.topAnchor.constraint(equalTo: self.view.topAnchor),
             self.backView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.backView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.backView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            
             self.crossButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.crossButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
             self.crossButton.widthAnchor.constraint(equalToConstant: 25),
@@ -112,7 +114,7 @@ class GestureProfileViewController: UIViewController {
                            completion: {_ in self.changeAlphaCrossButton() })
             
         }
-              
+        
     }
     
     private func changeAlphaCrossButton() {

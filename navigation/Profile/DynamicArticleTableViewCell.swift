@@ -49,7 +49,7 @@ final class DynamicArticleTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -58,7 +58,7 @@ final class DynamicArticleTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     private lazy var newsImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .black
@@ -82,7 +82,7 @@ final class DynamicArticleTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupView()
@@ -103,7 +103,7 @@ final class DynamicArticleTableViewCell: UITableViewCell {
     
     private func setupView() {
         self.contentView.backgroundColor = .white
-
+        
         self.contentView.addSubview(self.backView)
         self.backView.addSubview(self.stackView)
         self.stackView.addArrangedSubview(self.authorLabel)

@@ -17,7 +17,7 @@ class ProfileHeaderView: UIView {
     private let textField = UITextField()
     private var textFieldHeightAnchor: NSLayoutConstraint?
     private var textFieldIsHidden = true
-            
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -28,7 +28,7 @@ class ProfileHeaderView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-        
+    
     private func setupSubViews() {
         
         avatarImageView.layer.borderWidth = 3
@@ -37,7 +37,7 @@ class ProfileHeaderView: UIView {
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         avatarImageView.layer.cornerRadius = 50
         self.addSubview(avatarImageView)
-                
+        
         nameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         nameLabel.textColor = .black
         nameLabel.text = "Hipster Cat"
@@ -49,7 +49,7 @@ class ProfileHeaderView: UIView {
         statusLabel.text = statusText
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(statusLabel)
-                
+        
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.textColor = .black
@@ -69,7 +69,7 @@ class ProfileHeaderView: UIView {
         statusButton.setTitle("Изменить статус", for: .normal)
         statusButton.setTitleColor(.white, for: .normal)
         statusButton.addTarget(self, action: #selector(didTapStatusButton), for: .touchUpInside)
-        statusButton.translatesAutoresizingMaskIntoConstraints = false                
+        statusButton.translatesAutoresizingMaskIntoConstraints = false
         statusButton.layer.cornerRadius = 12.0;
         statusButton.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
         statusButton.layer.shadowRadius = 4.0
@@ -84,7 +84,7 @@ class ProfileHeaderView: UIView {
         
         let safeArea = self.safeAreaLayoutGuide
         self.textFieldHeightAnchor = self.textField.heightAnchor.constraint(equalToConstant: 0)
-                        
+        
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
             avatarImageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
@@ -118,7 +118,7 @@ class ProfileHeaderView: UIView {
     }
     
     @objc private func didTapStatusButton() {
-                        
+        
         self.textFieldHeightAnchor?.constant = textFieldIsHidden ? 40 : 0
         if textFieldIsHidden {
             self.textField.becomeFirstResponder()
@@ -131,5 +131,5 @@ class ProfileHeaderView: UIView {
         self.textFieldIsHidden.toggle()
         self.statusLabel.text = self.statusText
     }
-        
+    
 }

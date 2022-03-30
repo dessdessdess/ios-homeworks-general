@@ -8,13 +8,13 @@
 import UIKit
 
 class FeedViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navigationItem.backButtonTitle = "Назад"
         self.view.addSubview(stackView)
-        self.activateConstraints()                                
+        self.activateConstraints()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,29 +46,29 @@ class FeedViewController: UIViewController {
     }()
     
     let goToPostButton: UIButton = {
-            let button = UIButton()
-            button.layer.cornerRadius = 12
-            button.clipsToBounds = true
-            button.backgroundColor = .systemBlue
-            button.setTitle("Посмотреть пост #1", for: .normal)
-            button.setTitleColor(.white, for: .normal)
-            button.addTarget(self, action: #selector(didTapGoToPostButton), for: .touchUpInside)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            return button
-        }()
+        let button = UIButton()
+        button.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        button.backgroundColor = .systemBlue
+        button.setTitle("Посмотреть пост #1", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(didTapGoToPostButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     let secondGoToPostButton: UIButton = {
-            let button = UIButton()
-            button.layer.cornerRadius = 12
-            button.clipsToBounds = true
-            button.backgroundColor = .systemBlue
-            button.setTitle("Посмотреть пост #2", for: .normal)
-            button.setTitleColor(.white, for: .normal)
-            button.addTarget(self, action: #selector(didTapGoToPostButton), for: .touchUpInside)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            return button
-        }()
-
+        let button = UIButton()
+        button.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        button.backgroundColor = .systemBlue
+        button.setTitle("Посмотреть пост #2", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(didTapGoToPostButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     @objc private func didTapGoToPostButton() {
         let postViewController = PostViewController()
         postViewController.postDetail = Post(title: "Первый пост")
