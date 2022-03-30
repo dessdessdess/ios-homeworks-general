@@ -13,7 +13,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navigationItem.backButtonTitle = "Назад"
-        self.view.addSubview(self.goToPostButton)
+        self.view.addSubview(stackView)
         self.activateConstraints()                                
     }
     
@@ -33,18 +33,42 @@ class FeedViewController: UIViewController {
         var title: String
     }
     
-    private lazy var goToPostButton: UIButton = {
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(goToPostButton)
+        stackView.addArrangedSubview(secondGoToPostButton)
+        return stackView
+    }()
+    
+    let goToPostButton: UIButton = {
             let button = UIButton()
             button.layer.cornerRadius = 12
             button.clipsToBounds = true
             button.backgroundColor = .systemBlue
-            button.setTitle("Посмотреть пост", for: .normal)
+            button.setTitle("Посмотреть пост #1", for: .normal)
             button.setTitleColor(.white, for: .normal)
             button.addTarget(self, action: #selector(didTapGoToPostButton), for: .touchUpInside)
             button.translatesAutoresizingMaskIntoConstraints = false
             return button
         }()
- 
+    
+    let secondGoToPostButton: UIButton = {
+            let button = UIButton()
+            button.layer.cornerRadius = 12
+            button.clipsToBounds = true
+            button.backgroundColor = .systemBlue
+            button.setTitle("Посмотреть пост #2", for: .normal)
+            button.setTitleColor(.white, for: .normal)
+            button.addTarget(self, action: #selector(didTapGoToPostButton), for: .touchUpInside)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            return button
+        }()
+
     @objc private func didTapGoToPostButton() {
         let postViewController = PostViewController()
         postViewController.postDetail = Post(title: "Первый пост")
@@ -53,10 +77,13 @@ class FeedViewController: UIViewController {
     
     private func activateConstraints() {
         let safeArea = self.view.safeAreaLayoutGuide
-        self.goToPostButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        self.goToPostButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -10).isActive = true
-        self.goToPostButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20).isActive = true
-        self.goToPostButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20).isActive = true        
+        NSLayoutConstraint.activate([
+            self.stackView.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor, constant: 0),
+            self.stackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
+            self.stackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
+            self.goToPostButton.heightAnchor.constraint(equalToConstant: 50),
+            self.secondGoToPostButton.heightAnchor.constraint(equalTo: self.goToPostButton.heightAnchor)
+        ])
     }
     
 }
