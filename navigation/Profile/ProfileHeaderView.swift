@@ -128,14 +128,8 @@ class ProfileHeaderView: UIView {
             self.endEditing(true)
         }
         self.textField.text = ""
-        
-        UIView.animate(withDuration: 0.3) {
-            self.layoutIfNeeded()
-        } completion: { _ in
-            self.textFieldIsHidden.toggle()
-            self.statusLabel.text = self.statusText
-        }
-        
+        self.textFieldIsHidden.toggle()
+        self.statusLabel.text = self.statusText
     }
         
 }

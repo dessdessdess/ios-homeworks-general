@@ -9,7 +9,7 @@ import UIKit
 
 class GestureProfileViewController: UIViewController {
 
-    private lazy var avatarImageView: UIImageView = {
+    let avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "cat.jpg"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isUserInteractionEnabled = true
@@ -20,7 +20,7 @@ class GestureProfileViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var crossButton: UIButton = {
+    let crossButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(systemName: "x.circle"), for: .normal)
@@ -30,7 +30,7 @@ class GestureProfileViewController: UIViewController {
         return button
     }()
     
-    private lazy var backView: UIView = {
+    let backView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .black

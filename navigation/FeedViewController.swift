@@ -45,7 +45,7 @@ class FeedViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var goToPostButton: UIButton = {
+    let goToPostButton: UIButton = {
             let button = UIButton()
             button.layer.cornerRadius = 12
             button.clipsToBounds = true
@@ -57,7 +57,7 @@ class FeedViewController: UIViewController {
             return button
         }()
     
-    private lazy var secondGoToPostButton: UIButton = {
+    let secondGoToPostButton: UIButton = {
             let button = UIButton()
             button.layer.cornerRadius = 12
             button.clipsToBounds = true

@@ -9,11 +9,12 @@ import UIKit
 
 class LogInHeaderView: UIView{
     
-    private lazy var logoImageView: UIImageView = {
+    let logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo.png"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -25,7 +26,8 @@ class LogInHeaderView: UIView{
         stackView.addArrangedSubview(passwordTextField)
         return stackView
     }()
-    lazy var phoneTextField: UITextField = {
+    
+    let phoneTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont.systemFont(ofSize: 16)
@@ -45,7 +47,8 @@ class LogInHeaderView: UIView{
         textField.leftViewMode = .always
         return textField
     }()
-    lazy var passwordTextField: UITextField = {
+    
+    let passwordTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont.systemFont(ofSize: 16)

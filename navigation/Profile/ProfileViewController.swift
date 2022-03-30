@@ -18,7 +18,7 @@ class ProfileViewController: UIViewController {
         self.navigationItem.title = "Профиль"
         self.navigationItem.backButtonTitle = "Back"
         self.view.addSubview(tableView)
-        activateConstraints()
+        self.activateConstraints()
         
         dataSource = data
         
@@ -26,12 +26,12 @@ class ProfileViewController: UIViewController {
                 
     }
     
-    private lazy var profileHeaderView: ProfileHeaderView = {
+    let profileHeaderView: ProfileHeaderView = {
         let profileHeaderView = ProfileHeaderView()
         return profileHeaderView
     }()
     
-    private lazy var photosTableViewSection: PhotosTableViewSection = {
+    let photosTableViewSection: PhotosTableViewSection = {
         let photosTableViewSection = PhotosTableViewSection()
         photosTableViewSection.arrowButton.addTarget(self, action: #selector(didTapArrowButton), for: .touchUpInside)
         return photosTableViewSection
@@ -96,10 +96,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             return 236
         }
         else {
-            
-            //как правильно расчитать высоту секции если высота избражений расчитывается от ширины экрана?
-            //при повороте экрана надо же перерасчитывать высоту
-            return 150
+            return (UIScreen.main.bounds.width/4) - 24 + 56
         }
         
     }
@@ -143,10 +140,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 self.photosTableViewSection.trailingAnchor.constraint(equalTo: someView.safeAreaLayoutGuide.trailingAnchor)
             ])
             
-            for subView in photosTableViewSection.stackView.arrangedSubviews {
-                //расчет высоты картинок
-                subView.heightAnchor.constraint(lessThanOrEqualToConstant: (self.view.frame.width/4) - 24).isActive = true
-            }
+//            for subView in photosTableViewSection.stackView.arrangedSubviews {
+//                //расчет высоты картинок
+//                subView.heightAnchor.constraint(lessThanOrEqualToConstant: (self.view.frame.width/4) - 24).isActive = true
+//            }
             
             return someView
                     

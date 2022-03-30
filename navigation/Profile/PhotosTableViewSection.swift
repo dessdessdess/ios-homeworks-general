@@ -9,7 +9,7 @@ import UIKit
 
 class PhotosTableViewSection: UIView {
     
-    private lazy var photosLabel:UILabel = {
+    let photosLabel: UILabel = {
         let photosLabel = UILabel()
         photosLabel.translatesAutoresizingMaskIntoConstraints = false
         photosLabel.textColor = .black
@@ -18,7 +18,7 @@ class PhotosTableViewSection: UIView {
         return photosLabel
     }()
     
-    lazy var arrowButton:UIButton = {
+    let arrowButton: UIButton = {
         guard let arrowImage = UIImage(systemName: "arrow.right") else {return UIButton()}
         let arrowImageView = UIButton()
         arrowImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,7 +27,7 @@ class PhotosTableViewSection: UIView {
         return arrowImageView
     }()
     
-    lazy var stackView: UIStackView = {
+    private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 8
@@ -40,6 +40,7 @@ class PhotosTableViewSection: UIView {
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.clipsToBounds = true
             imageView.layer.cornerRadius = 6
+            imageView.heightAnchor.constraint(lessThanOrEqualToConstant: (UIScreen.main.bounds.width/4) - 24).isActive = true
             stackView.addArrangedSubview(imageView)
         }
         return stackView
@@ -66,7 +67,6 @@ class PhotosTableViewSection: UIView {
     
     private func activateConstraints() {
         NSLayoutConstraint.activate([
-            
             self.photosLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
             self.photosLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
    
@@ -77,9 +77,7 @@ class PhotosTableViewSection: UIView {
             self.stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
             self.stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12),
             self.stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12)
-           
         ])
-                
     }
     
 }

@@ -17,14 +17,14 @@ final class DynamicArticleTableViewCell: UITableViewCell {
         let views: Int
     }
     
-    private lazy var backView: UIView = {
+    let backView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private lazy var horizontalStackView: UIStackView = {
+    let horizontalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
@@ -32,7 +32,7 @@ final class DynamicArticleTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    private lazy var stackView: UIStackView = {
+    let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 16
@@ -40,7 +40,7 @@ final class DynamicArticleTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    private lazy var authorLabel: UILabel = {
+    let authorLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.numberOfLines = 2
@@ -50,7 +50,7 @@ final class DynamicArticleTableViewCell: UITableViewCell {
         return label
     }()
 
-    private lazy var descriptionLabel: UILabel = {
+    let descriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 14)
@@ -67,7 +67,7 @@ final class DynamicArticleTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private lazy var likesLabel: UILabel = {
+    let likesLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
         label.textColor = .black
@@ -75,7 +75,7 @@ final class DynamicArticleTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var viewsLabel: UILabel = {
+    let viewsLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
         label.textColor = .black
@@ -112,37 +112,23 @@ final class DynamicArticleTableViewCell: UITableViewCell {
         self.horizontalStackView.addArrangedSubview(self.likesLabel)
         self.horizontalStackView.addArrangedSubview(self.viewsLabel)
         self.stackView.addArrangedSubview(self.horizontalStackView)
-                
-        let backViewConstraints = self.backViewConstraints()
-        let stackViewConstraints = self.stackViewConstraints()
-
+        self.activateConstraints()
+    }
+    
+    private func activateConstraints() {
         NSLayoutConstraint.activate([
-            self.newsImageView.heightAnchor.constraint(equalToConstant: self.contentView.frame.width)
-        ] + backViewConstraints + stackViewConstraints
-        )
-                
-    }
-    
-    private func backViewConstraints() -> [NSLayoutConstraint] {
-        let topConstraint = self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16)
-        let leadingConstraint = self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16)
-        let trailingConstraint = self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16)
-        let bottomConstraint = self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 0)
-
-        return [
-            topConstraint, leadingConstraint, trailingConstraint, bottomConstraint
-        ]
-    }
-    
-    private func stackViewConstraints() -> [NSLayoutConstraint] {
-        let topConstraint = self.stackView.topAnchor.constraint(equalTo: self.backView.topAnchor, constant: 0)
-        let leadingConstraint = self.stackView.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 0)
-        let trailingConstraint = self.stackView.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: 0)
-        let bottomConstraint = self.stackView.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor, constant: -16)
-
-        return [
-            topConstraint, leadingConstraint, trailingConstraint, bottomConstraint
-        ]
+            self.newsImageView.heightAnchor.constraint(equalToConstant: self.contentView.frame.width),
+            
+            self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
+            self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
+            self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+            self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 0),
+            
+            self.stackView.topAnchor.constraint(equalTo: self.backView.topAnchor, constant: 0),
+            self.stackView.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 0),
+            self.stackView.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: 0),
+            self.stackView.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor, constant: -16)
+        ])
     }
 }
 

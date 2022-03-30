@@ -9,7 +9,7 @@ import UIKit
 
 class CustomCollectionViewCell: UICollectionViewCell {
     
-    private lazy var imageView: UIImageView = {
+    let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -18,8 +18,10 @@ class CustomCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.contentView.addSubview(self.imageView)
-        
-        
+        self.activateConstraints()
+    }
+    
+    private func activateConstraints() {
         NSLayoutConstraint.activate([
             self.imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             self.imageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
@@ -34,7 +36,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        //self.label.text = nil
     }
     
     func setup(with index: Int) {

@@ -16,7 +16,7 @@ class InfoViewController: UIViewController {
         self.activateConstraints()        
     }
     
-    private lazy var saveButton: UIButton = {
+    let saveButton: UIButton = {
             let button = UIButton()
             button.layer.cornerRadius = 12
             button.clipsToBounds = true

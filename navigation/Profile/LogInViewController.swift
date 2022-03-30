@@ -9,12 +9,12 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
-    private lazy var logInHeaderView: LogInHeaderView = {
+    let logInHeaderView: LogInHeaderView = {
         let logInHeaderView = LogInHeaderView()
         return logInHeaderView
     }()
     
-    private lazy var scrollView: UIScrollView = {
+    let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
@@ -28,7 +28,7 @@ class LogInViewController: UIViewController {
         return contentView
     }()
     
-    private lazy var loginButton: UIButton = {
+    let loginButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -70,34 +70,29 @@ class LogInViewController: UIViewController {
     }
         
     private func activateConstraints() {
-        
-        let scrollViewTopConstraint = self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor)
-        let scrollViewRightConstraint = self.scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor)
-        let scrollViewBottomConstraint = self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
-        let scrollViewLeftConstraint = self.scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor)
-        
-        let contentViewTopConstraint = self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor)
-        let contentViewBottomConstraint = self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: -16)
-        let contentViewRightConstraint = self.contentView.rightAnchor.constraint(equalTo: self.scrollView.rightAnchor)
-        let contentViewLeftConstraint = self.contentView.leftAnchor.constraint(equalTo: self.scrollView.leftAnchor)
-        let contentViewCenterYConstraint = self.contentView.centerYAnchor.constraint(equalTo: self.scrollView.centerYAnchor)
-        let contentViewCenterXConstraint = self.contentView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor)
-                
-        let loginHeaderViewLeadingAnchor = self.logInHeaderView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
-        let loginHeaderViewTrailingAnchor = self.logInHeaderView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-        let loginHeaderViewTopAnchor = self.logInHeaderView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
-        let loginHeaderViewHeightAnchor = self.logInHeaderView.heightAnchor.constraint(equalToConstant: 100)
-        
-        let loginButtonTopAnchor = self.loginButton.topAnchor.constraint(equalTo: self.logInHeaderView.bottomAnchor, constant: 16)
-        let loginButtonLeftAnchor = self.loginButton.leftAnchor.constraint(equalTo: self.logInHeaderView.leftAnchor, constant: 16)
-        let loginButtonTrailingAnchor = self.loginButton.trailingAnchor.constraint(equalTo: self.logInHeaderView.trailingAnchor, constant: -16)
-        let loginButtonHeightAnchor = self.loginButton.heightAnchor.constraint(equalToConstant: 50)
-        
+     
         NSLayoutConstraint.activate([
-            scrollViewTopConstraint, scrollViewRightConstraint, scrollViewBottomConstraint, scrollViewLeftConstraint,
-            contentViewTopConstraint, contentViewBottomConstraint, contentViewRightConstraint, contentViewLeftConstraint, contentViewCenterYConstraint, contentViewCenterXConstraint,
-            loginHeaderViewLeadingAnchor, loginHeaderViewTrailingAnchor, loginHeaderViewTopAnchor, loginHeaderViewHeightAnchor,
-            loginButtonTopAnchor, loginButtonLeftAnchor, loginButtonTrailingAnchor, loginButtonHeightAnchor
+            self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            
+            self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+            self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: -16),
+            self.contentView.rightAnchor.constraint(equalTo: self.scrollView.rightAnchor),
+            self.contentView.leftAnchor.constraint(equalTo: self.scrollView.leftAnchor),
+            self.contentView.centerYAnchor.constraint(equalTo: self.scrollView.centerYAnchor),
+            self.contentView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+            
+            self.logInHeaderView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            self.logInHeaderView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            self.logInHeaderView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            self.logInHeaderView.heightAnchor.constraint(equalToConstant: 100),
+            
+            self.loginButton.topAnchor.constraint(equalTo: self.logInHeaderView.bottomAnchor, constant: 16),
+            self.loginButton.leftAnchor.constraint(equalTo: self.logInHeaderView.leftAnchor, constant: 16),
+            self.loginButton.trailingAnchor.constraint(equalTo: self.logInHeaderView.trailingAnchor, constant: -16),
+            self.loginButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
         self.logInHeaderView.activateConstraints()
