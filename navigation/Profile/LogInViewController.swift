@@ -131,13 +131,11 @@ class LogInViewController: UIViewController {
                 
         var haveEmptyFields = false
         if phoneText.isEmpty {
-            self.logInHeaderView.phoneTextField.layer.borderColor = UIColor.systemRed.cgColor
-            self.logInHeaderView.phoneTextField.layer.borderWidth = 2
+            self.logInHeaderView.phoneTextField.shake()
             haveEmptyFields = true
         }
         if passwordText.isEmpty {
-            self.logInHeaderView.passwordTextField.layer.borderColor = UIColor.systemRed.cgColor
-            self.logInHeaderView.passwordTextField.layer.borderWidth = 2
+            self.logInHeaderView.passwordTextField.shake()
             haveEmptyFields = true
         }
         if haveEmptyFields {

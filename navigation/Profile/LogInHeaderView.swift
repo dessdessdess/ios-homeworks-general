@@ -45,19 +45,8 @@ class LogInHeaderView: UIView{
         textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 5))
         textField.leftViewMode = .always
-        textField.addTarget(self, action: #selector(phoneEditingChanged), for: .editingChanged)
         return textField
     }()
-    
-    @objc private func phoneEditingChanged() {
-        
-        guard let phoneText = self.phoneTextField.text else { return }
-        
-        if self.phoneTextField.layer.borderColor == UIColor.systemRed.cgColor && !phoneText.isEmpty {
-            self.phoneTextField.layer.borderWidth = 0.5
-            self.phoneTextField.layer.borderColor = UIColor.lightGray.cgColor
-        }
-    }
     
     let passwordTextField: UITextField = {
         let textField = UITextField()
@@ -78,20 +67,9 @@ class LogInHeaderView: UIView{
         textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 5))
         textField.leftViewMode = .always
-        textField.addTarget(self, action: #selector(passwordEditingChanged), for: .editingChanged)
         return textField
     }()
-    
-    @objc private func passwordEditingChanged() {
-        
-        guard let passwordText = self.phoneTextField.text else { return }
-        
-        if self.passwordTextField.layer.borderColor == UIColor.systemRed.cgColor && !passwordText.isEmpty {
-            self.passwordTextField.layer.borderWidth = 0.5
-            self.passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
-        }
-    }
-        
+            
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false

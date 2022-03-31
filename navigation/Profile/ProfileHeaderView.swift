@@ -128,6 +128,10 @@ class ProfileHeaderView: UIView {
     
     @objc private func didTapStatusButton() {
         
+        if let statusTextFieldText = self.statusTextField.text, statusTextFieldText.isEmpty && !self.textFieldIsHidden  {
+            self.statusTextField.shake()
+            return
+        }
         self.textFieldHeightAnchor?.constant = textFieldIsHidden ? 40 : 0
         if textFieldIsHidden {
             self.statusTextField.becomeFirstResponder()
