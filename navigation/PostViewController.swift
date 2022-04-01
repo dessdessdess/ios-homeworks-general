@@ -8,7 +8,7 @@
 import UIKit
 
 class PostViewController: UIViewController {
-
+    
     var postDetail: FeedViewController.Post? //в ДЗ написано: "cоздайте объект типа Post в FeedViewController и передайте его в PostViewController". Поэтому в PostViewController сделано свойство postDetail c типом FeedViewController.Post? Если есть более оптимальный способ передачи структуры между контроллерами - прошу подсказать
     
     override func viewDidLoad() {
@@ -31,5 +31,5 @@ class PostViewController: UIViewController {
     @objc private func didTapEditButton() {
         present(InfoViewController(), animated: true, completion: nil)
     }
-       
+    
 }

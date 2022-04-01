@@ -8,25 +8,25 @@
 import UIKit
 
 class InfoViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.view.addSubview(self.saveButton)
-        self.activateConstraints()        
+        self.activateConstraints()
     }
     
     let saveButton: UIButton = {
-            let button = UIButton()
-            button.layer.cornerRadius = 12
-            button.clipsToBounds = true
-            button.backgroundColor = .systemBlue
-            button.setTitle("Сохранить", for: .normal)
-            button.setTitleColor(.white, for: .normal)
-            button.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            return button
-        }()
+        let button = UIButton()
+        button.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        button.backgroundColor = .systemBlue
+        button.setTitle("Сохранить", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     private func activateConstraints() {
         let safeArea = self.view.safeAreaLayoutGuide
@@ -52,11 +52,11 @@ class InfoViewController: UIViewController {
     }
     
     private func saveChanges(action: UIAlertAction) {
-           print(#function)
-       }
-       
-       private func dismissChanges(action: UIAlertAction) {
-           print(#function)
-       }
+        print(#function)
+    }
+    
+    private func dismissChanges(action: UIAlertAction) {
+        print(#function)
+    }
     
 }

@@ -69,7 +69,7 @@ class LogInHeaderView: UIView{
         textField.leftViewMode = .always
         return textField
     }()
-        
+            
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -97,10 +97,9 @@ class LogInHeaderView: UIView{
             self.stackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             self.stackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             self.stackView.heightAnchor.constraint(equalToConstant: 100),
-                                    
         ])
     }
-   
+    
     
 }
 

@@ -14,6 +14,17 @@ class LogInViewController: UIViewController {
         return logInHeaderView
     }()
     
+    let passwordLengthErrorLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 10)
+        label.textColor = .systemRed
+        label.text = "Длина пароля меньше допустимой"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var passwordLengthErrorLabelHeightAnchor: NSLayoutConstraint?
+    
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -51,6 +62,7 @@ class LogInViewController: UIViewController {
         self.view.backgroundColor = .white
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.contentView)
+        self.view.addSubview(self.passwordLengthErrorLabel)
         self.activateConstraints()
         self.setupGesture()
     }
@@ -68,9 +80,11 @@ class LogInViewController: UIViewController {
         nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-        
+    
     private func activateConstraints() {
-     
+        
+        self.passwordLengthErrorLabelHeightAnchor = self.passwordLengthErrorLabel.heightAnchor.constraint(equalToConstant: 0)
+        
         NSLayoutConstraint.activate([
             self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
             self.scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
@@ -89,28 +103,72 @@ class LogInViewController: UIViewController {
             self.logInHeaderView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             self.logInHeaderView.heightAnchor.constraint(equalToConstant: 100),
             
-            self.loginButton.topAnchor.constraint(equalTo: self.logInHeaderView.bottomAnchor, constant: 16),
+            self.passwordLengthErrorLabel.leadingAnchor.constraint(equalTo: self.logInHeaderView.leadingAnchor, constant: 16),
+            self.passwordLengthErrorLabel.trailingAnchor.constraint(equalTo: self.logInHeaderView.trailingAnchor, constant: -16),
+            self.passwordLengthErrorLabel.topAnchor.constraint(equalTo: self.logInHeaderView.bottomAnchor),
+            self.passwordLengthErrorLabelHeightAnchor!,
+            
+            self.loginButton.topAnchor.constraint(equalTo: self.passwordLengthErrorLabel.bottomAnchor, constant: 16),
             self.loginButton.leftAnchor.constraint(equalTo: self.logInHeaderView.leftAnchor, constant: 16),
             self.loginButton.trailingAnchor.constraint(equalTo: self.logInHeaderView.trailingAnchor, constant: -16),
             self.loginButton.heightAnchor.constraint(equalToConstant: 50)
         ])
-        
-        self.logInHeaderView.activateConstraints()
+        self.logInHeaderView.activateConstraints()        
     }
     
     private func setupGesture() {
-            self.tapGestureRecognizer.addTarget(self, action: #selector(self.viewTapped))
-            self.view.addGestureRecognizer(self.tapGestureRecognizer)
-        }
+        self.tapGestureRecognizer.addTarget(self, action: #selector(self.viewTapped))
+        self.view.addGestureRecognizer(self.tapGestureRecognizer)
+    }
     
     @objc private func viewTapped() {
         self.view.endEditing(true)
     }
-        
-    @objc private func didTapLoginButton() {
-        self.navigationController?.pushViewController(ProfileViewController(), animated: true)
-    }
     
+    @objc private func didTapLoginButton() {
+                
+        guard let phoneText = self.logInHeaderView.phoneTextField.text, let passwordText = self.logInHeaderView.passwordTextField.text else { return }
+                
+        var haveEmptyFields = false
+        if phoneText.isEmpty {
+            self.logInHeaderView.phoneTextField.shake()
+            haveEmptyFields = true
+        }
+        if passwordText.isEmpty {
+            self.logInHeaderView.passwordTextField.shake()
+            haveEmptyFields = true
+        }
+        if haveEmptyFields {
+            return
+        }
+        self.passwordLengthErrorLabelHeightAnchor?.constant = 0
+        if passwordText.count < standartPasswordLength {
+            self.passwordLengthErrorLabelHeightAnchor?.constant = 16
+            return
+        }
+        
+        if phoneText != standartLogin {
+            let alert = UIAlertController(title: "Внимание",
+                                          message: "Неверный логин!",
+                                          preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        if passwordText != standartPassword {
+            let alert = UIAlertController(title: "Внимание",
+                                          message: "Неверный пароль!",
+                                          preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "ОК", style: UIAlertAction.Style.default))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+        
+    }
+        
     @objc private func kbdShow(notification: NSNotification){
         if let kbdSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             self.scrollView.contentOffset.y = self.loginButton.frame.height + 16
@@ -122,5 +180,5 @@ class LogInViewController: UIViewController {
         self.scrollView.contentOffset.y = .zero
         self.scrollView.verticalScrollIndicatorInsets = .zero
     }
-       
+    
 }

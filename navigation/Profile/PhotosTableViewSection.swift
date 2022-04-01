@@ -45,7 +45,7 @@ class PhotosTableViewSection: UIView {
         }
         return stackView
     }()
-        
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +69,7 @@ class PhotosTableViewSection: UIView {
         NSLayoutConstraint.activate([
             self.photosLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
             self.photosLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
-   
+            
             self.arrowButton.centerYAnchor.constraint(equalTo: self.photosLabel.centerYAnchor),
             self.arrowButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12),
             

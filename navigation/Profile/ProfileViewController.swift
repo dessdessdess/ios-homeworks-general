@@ -8,12 +8,12 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-        
+    
     private var dataSource: [Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-               
+        
         self.view.backgroundColor = .white
         self.navigationItem.title = "Профиль"
         self.navigationItem.backButtonTitle = "Back"
@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController {
         dataSource = data
         
         tableView.reloadData()
-                
+        
     }
     
     let profileHeaderView: ProfileHeaderView = {
@@ -54,9 +54,9 @@ class ProfileViewController: UIViewController {
         tableView.register(DynamicArticleTableViewCell.self, forCellReuseIdentifier: "ArticleCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
-       }()
-
-        
+    }()
+    
+    
     private func activateConstraints() {
         let safeArea = self.view.safeAreaLayoutGuide
         
@@ -66,16 +66,16 @@ class ProfileViewController: UIViewController {
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
         ])
-                        
+        
         self.profileHeaderView.activateConstraints()
         
     }
-     
+    
 }
 
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
-        
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         2
     }
@@ -91,7 +91,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-
+        
         if section == 0 {
             return 236
         }
@@ -140,13 +140,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 self.photosTableViewSection.trailingAnchor.constraint(equalTo: someView.safeAreaLayoutGuide.trailingAnchor)
             ])
             
-//            for subView in photosTableViewSection.stackView.arrangedSubviews {
-//                //расчет высоты картинок
-//                subView.heightAnchor.constraint(lessThanOrEqualToConstant: (self.view.frame.width/4) - 24).isActive = true
-//            }
-            
             return someView
-                    
+            
         }
         
     }
@@ -154,9 +149,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath) //не отрабатывает при нажатии на секцию, поэтому пришлось открытие фото галереи  сделать по нажатию стрелки вправо
     }
-        
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-               
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as? DynamicArticleTableViewCell else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
             return cell
