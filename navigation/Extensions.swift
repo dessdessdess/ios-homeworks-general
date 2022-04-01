@@ -47,3 +47,7 @@ extension UITextField {
         layer.add(animation, forKey: "shake")
     }
 }
+
+class CustomTapGestureRecognizer: UITapGestureRecognizer {
+    var indexPath: IndexPath?
+}
