@@ -8,15 +8,14 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    
+        
     private var dataSource: [Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
-        self.navigationItem.title = "Профиль"
-        self.navigationItem.backButtonTitle = "Back"
+        self.navigationItem.backButtonTitle = "Назад"
         self.view.addSubview(tableView)
         self.activateConstraints()
         
@@ -47,7 +46,7 @@ class ProfileViewController: UIViewController {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = .white
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 44
+        tableView.estimatedRowHeight = 30
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
@@ -71,8 +70,22 @@ class ProfileViewController: UIViewController {
         
     }
     
+    @objc private func likesTapped(sender: CustomTapGestureRecognizer) {
+        guard let indexPath = sender.indexPath else { return }
+        self.dataSource[indexPath.row].likes += 1
+        tableView.reloadRows(at: [indexPath], with: .none)
+   }
+    
+    @objc private func imageTapped(sender: CustomTapGestureRecognizer) {
+        guard let indexPath = sender.indexPath else { return }
+        self.dataSource[indexPath.row].views += 1
+        tableView.reloadRows(at: [indexPath], with: .none)
+        let detailPostVC = DetailPostViewController()
+        detailPostVC.indexPathRow = indexPath.row
+        navigationController?.pushViewController(detailPostVC, animated: true)
+   }
+        
 }
-
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -164,6 +177,19 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                                                               likes: article.likes,
                                                               views: article.views)
         cell.setup(with: viewModel)
+        
+        cell.likesLabel.isUserInteractionEnabled = true
+        let likesTapGestureRecognizer = CustomTapGestureRecognizer(target:self, action: #selector(self.likesTapped))
+        likesTapGestureRecognizer.indexPath = indexPath
+        cell.likesLabel.addGestureRecognizer(likesTapGestureRecognizer)
+        
+        cell.newsImageView.isUserInteractionEnabled = true
+        let imageTapGestureRecognizer = CustomTapGestureRecognizer(target:self, action: #selector(self.imageTapped))
+        imageTapGestureRecognizer.indexPath = indexPath
+        cell.newsImageView.addGestureRecognizer(imageTapGestureRecognizer)
+        
         return cell
     }
+    
 }
+

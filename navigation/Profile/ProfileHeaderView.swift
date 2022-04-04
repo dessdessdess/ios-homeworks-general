@@ -66,9 +66,7 @@ class ProfileHeaderView: UIView {
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         return textField
     }()
-    private var textFieldHeightAnchor: NSLayoutConstraint?
-    private var textFieldIsHidden = true
-    
+       
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -92,8 +90,7 @@ class ProfileHeaderView: UIView {
     func activateConstraints() {
         
         let safeArea = self.safeAreaLayoutGuide
-        self.textFieldHeightAnchor = self.statusTextField.heightAnchor.constraint(equalToConstant: 0)
-        
+                
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
             avatarImageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
@@ -112,7 +109,7 @@ class ProfileHeaderView: UIView {
             statusTextField.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             statusTextField.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
             statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16),
-            textFieldHeightAnchor!,
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
             
             statusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
             statusButton.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
@@ -128,20 +125,12 @@ class ProfileHeaderView: UIView {
     
     @objc private func didTapStatusButton() {
         
-        if let statusTextFieldText = self.statusTextField.text, statusTextFieldText.isEmpty && !self.textFieldIsHidden  {
+        if let statusTextFieldText = self.statusTextField.text, statusTextFieldText.isEmpty {
             self.statusTextField.shake()
             return
         }
-        self.textFieldHeightAnchor?.constant = textFieldIsHidden ? 40 : 0
-        if textFieldIsHidden {
-            self.statusTextField.becomeFirstResponder()
-            self.statusButton.setTitle("Сохранить статус", for: .normal)
-        } else {
-            self.statusButton.setTitle("Изменить статус", for: .normal)
-            self.endEditing(true)
-        }
+        self.endEditing(true)
         self.statusTextField.text = ""
-        self.textFieldIsHidden.toggle()
         self.statusLabel.text = self.statusText
     }
     

@@ -59,7 +59,7 @@ final class DynamicArticleTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var newsImageView: UIImageView = {
+    lazy var newsImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .black
         imageView.contentMode = .scaleAspectFit
@@ -96,7 +96,7 @@ final class DynamicArticleTableViewCell: UITableViewCell {
         super.prepareForReuse()
         self.authorLabel.text = nil
         self.descriptionLabel.text = nil
-        self.newsImageView = UIImageView()
+        self.newsImageView.image = nil
         self.likesLabel.text = nil
         self.viewsLabel.text = nil
     }
