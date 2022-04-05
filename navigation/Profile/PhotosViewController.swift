@@ -32,7 +32,7 @@ class PhotosViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(systemName: "x.circle"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = .white
         button.alpha = 0
         button.addTarget(self, action: #selector(crossTapped), for: .touchUpInside)
         return button
@@ -115,8 +115,6 @@ class PhotosViewController: UIViewController {
         self.imageView.isHidden = false
         self.backView.alpha = 0.6
         self.crossButton.alpha = 1
-              
-        UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
    }
     
     @objc private func crossTapped(sender: CustomTapGestureRecognizer) {
@@ -124,8 +122,6 @@ class PhotosViewController: UIViewController {
         self.imageView.image = nil
         self.backView.alpha = 0
         self.crossButton.alpha = 0
-              
-        UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
    }
     
 }
