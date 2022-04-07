@@ -85,6 +85,7 @@ class PhotosViewController: UIViewController {
             self.imageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.imageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.imageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            self.imageView.heightAnchor.constraint(equalTo: self.view.widthAnchor),
             
             self.crossButton.trailingAnchor.constraint(equalTo: self.imageView.trailingAnchor, constant: -5),
             self.crossButton.bottomAnchor.constraint(equalTo: self.imageView.topAnchor, constant: -5),
